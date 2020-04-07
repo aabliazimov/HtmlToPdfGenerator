@@ -9,7 +9,7 @@ server.use(bodyParser.json({
     limit: '10mb'
 }));
 
-server.use('/api', apiRouter);
+server.use('/api/pdf', apiRouter);
 server.use('/ping', pingRouter);
 
 server.use((err, req, res, next) => {
