@@ -8,16 +8,20 @@ async function convertToPdf(pageContentSetter) {
     });
     const page = await browser.newPage();
 
-    await page.setViewport({width: 1200, height: 900});
+    await page.addStyleTag({
+        content: 'html{-webkit-print-color-adjust:exact;}',
+    });
     await pageContentSetter(page);
+    await page.emulateMedia('screen');
 
     const buffer = await page.pdf({
-        format: "A4",
         printBackground: true,
         margin: {
             top: 20,
             bottom: 20
-        }
+        },
+        width: 1000,
+        height: 1400
     });
 
     await browser.close();
