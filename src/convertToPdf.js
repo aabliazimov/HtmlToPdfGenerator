@@ -1,9 +1,13 @@
 const puppeteer = require('puppeteer');
 
 async function convertToPdf(pageContentSetter) {
-    const browser = await puppeteer.launch({ 
+    const browser = await puppeteer.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--start-fullscreen'
+        ],
         ignoreHTTPSErrors: true
     });
     const page = await browser.newPage();
@@ -20,8 +24,7 @@ async function convertToPdf(pageContentSetter) {
             top: 20,
             bottom: 20
         },
-        width: 1000,
-        height: 1400
+        scale: 0.50
     });
 
     await browser.close();
